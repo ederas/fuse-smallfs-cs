@@ -99,8 +99,7 @@ namespace OperatingSystem{
 				case hello_path:
 				case data_path:
 				case data_im_path:				
-					stbuf.st_mode = FilePermissions.S_IFREG |
-						NativeConvert.FromOctalPermissionString ("0444");
+					stbuf.st_mode = FilePermissions.S_IFREG | NativeConvert.FromOctalPermissionString ("0444");
 					stbuf.st_nlink = 1;
 					int size = 0;
 					switch (path) {
@@ -111,10 +110,9 @@ namespace OperatingSystem{
 					stbuf.st_size = size;
 					return 0;
 				default:
-					stbuf.st_mode = FilePermissions.S_IFREG |
-						NativeConvert.FromOctalPermissionString ("0444");
+					stbuf.st_mode = FilePermissions.S_IFREG | NativeConvert.FromOctalPermissionString ("0444");
 					stbuf.st_nlink = 1;
-					stbuf.st_size = 0;
+					stbuf.st_size = 0;					
 					return 0;
 			}
 		}
@@ -140,11 +138,9 @@ namespace OperatingSystem{
 			if (have_data_im)
 				yield return new DirectoryEntry ("data.im");
 				
-			foreach(string key in rootDir.Keys)
-			{
+			foreach(string key in rootDir.Keys)			
 				yield return new DirectoryEntry (key);
-				Console.WriteLine("Key: {0}", key);
-			}
+			
 
 		}
 
