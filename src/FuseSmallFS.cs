@@ -69,7 +69,12 @@ namespace OperatingSystem{
 			
 			for(int i=0; i<FuseDevice.SECTOR_SIZE;i+=ENTRY_SIZE)
 			{
-				Array.Copy(dirDevice,i,entry,0,ENTRY_SIZE);
+				entry[0] = 0x0;
+				entryName[0] = 0x0;
+				entrySectors[0] = 0x0;
+				
+				Array.Copy(dirDevice,i,entry,0,ENTRY_SIZE);				
+				if (entry[0] = 0x0) continue;
 				
 				Array.Copy(entry, 0, entryName, 0, MAX_NAME_LEN);
 				Array.Copy(entry, MAX_NAME_LEN, entrySectors, 0, MAX_SECTORS_PER_FILE);
