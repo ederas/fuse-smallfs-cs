@@ -253,7 +253,8 @@ namespace OperatingSystem{
 						return false;
 					default:
 						this.DeviceFile = args [i];
-						base.MountPoint = args [i+1];						
+						base.MountPoint = args [i+1];
+						i = args.Length;
 						break;
 				}
 			}
@@ -281,11 +282,12 @@ namespace OperatingSystem{
 				string fullPath = "";
 				string[] unhandled = fs.ParseFuseArguments (args);
 				
-				Console.WriteLine("Arguments Count: {0}", unhandled.Length);
-				
 				foreach (string key in fs.FuseOptions.Keys) {
 					Console.WriteLine ("Option: {0}={1}", key, fs.FuseOptions [key]);
 				}
+				
+				Console.WriteLine("Arguments Count: {0}", unhandled.Length);
+				
 				if (!fs.ParseArguments (unhandled))
 					return;
 				
