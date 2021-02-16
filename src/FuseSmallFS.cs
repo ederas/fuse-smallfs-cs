@@ -117,6 +117,7 @@ namespace OperatingSystem{
 				return Errno.ENOENT;
 
 			paths = GetEntries ();
+			Console.WriteLine("Entries Count: {0}", paths.Length);
 			return 0;
 		}
 
