@@ -114,6 +114,7 @@ namespace OperatingSystem{
 					stbuf.st_mode = FilePermissions.S_IFREG |
 						NativeConvert.FromOctalPermissionString ("0444");
 					stbuf.st_nlink = 1;
+					stbuf.st_size = 0;
 					return 0;
 			}
 		}
