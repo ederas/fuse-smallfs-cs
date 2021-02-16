@@ -31,7 +31,7 @@ namespace OperatingSystem{
 		Dictionary<string, byte[]> rootDir = new Dictionary<string, byte[]>();
 		
 		string deviceFile = "";
-		public DeviceFile { get{ return device; } set{ deviceFile = value; } }
+		public string DeviceFile { get{ return device; } set{ deviceFile = value; } }
 
 		byte[] mapDevice = new byte[SECTOR_SIZE];
 		byte[] dirDevice = new byte[SECTOR_SIZE];
