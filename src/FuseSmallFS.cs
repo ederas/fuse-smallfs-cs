@@ -128,8 +128,16 @@ namespace OperatingSystem{
 		{
 			yield return new DirectoryEntry (".");
 			yield return new DirectoryEntry ("..");
+			yield return new DirectoryEntry ("hello");
+			yield return new DirectoryEntry ("data");
+			if (have_data_im)
+				yield return new DirectoryEntry ("data.im");
+				
 			foreach(string key in rootDir.Keys)
+			{
 				yield return new DirectoryEntry (key);
+				Console.WriteLine("Key: {0}", key);
+			}
 
 		}
 
