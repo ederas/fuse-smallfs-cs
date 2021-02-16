@@ -21,7 +21,7 @@ namespace OperatingSystem{
 		public string DevicePath { get { return devicePath; } set { devicePath = value; } }
 		
 		FileStream deviceFile;
-		private FileStream DeviceFile{ get { return deviceFile; }}
+		private FileStream DeviceFile{ get { return deviceFile; } set { deviceFile = value; }}
 
 		public FuseDevice (string path)
 		{
