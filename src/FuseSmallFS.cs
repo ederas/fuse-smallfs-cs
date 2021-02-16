@@ -289,7 +289,7 @@ namespace OperatingSystem{
 				fs.FsDevice = new FuseDevice(fullPath);
 				
 				Console.WriteLine("Device: {0}", fullPath);
-				if (!fs.FsDevice.OpenDevice(fullPath)) {
+				if (!fs.FsDevice.DeviceOpen(fullPath)) {
 					Console.WriteLine("Cannot open device file {0}", fullPath);
 					return;
 				}
