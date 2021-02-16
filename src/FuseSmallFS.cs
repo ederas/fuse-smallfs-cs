@@ -36,11 +36,8 @@ namespace OperatingSystem{
 		FuseDevice fsDevice = null;
 		public FuseDevice FsDevice { get{ return fsDevice; } set{ fsDevice = value; } }
 
-		byte[] mapDevice = new byte[FuseDevice.SECTOR_SIZE];
-		public byte[] MapDevice { get{ return mapDevice; } set{ mapDevice = value; } }
-		
-		byte[] dirDevice = new byte[FuseDevice.SECTOR_SIZE];
-		public byte[] DirDevice { get{ return mapDevice; } set{ mapDevice = value; } }
+		byte[] mapDevice = new byte[FuseDevice.SECTOR_SIZE];		
+		byte[] dirDevice = new byte[FuseDevice.SECTOR_SIZE];		
 		
 		static readonly byte[] hello_str = Encoding.UTF8.GetBytes ("Hello World!\n");
 		const string hello_path = "/hello";
@@ -276,6 +273,12 @@ namespace OperatingSystem{
 				}
 			}
 		}
+		
+		public void InitFs()
+		{
+			DeviceReadSector(mapDevice, 1);
+			DeviceReadSector(dirDevice, 2);
+		}
 
 		public static void Main (string[] args)
 		{
@@ -300,17 +303,7 @@ namespace OperatingSystem{
 					Console.WriteLine("Cannot open device file {0}", fullPath);
 					return;
 				}
-				
-				fs.FsDevice.DeviceReadSector(fs.MapDevice, 1);				
-				Console.WriteLine("Device Map");
-				Console.WriteLine( Encoding.UTF8.GetString(fs.MapDevice));
-				
-				fs.FsDevice.DeviceReadSector(fs.DirDevice, 2);
-				Console.WriteLine("Device Directory");
-				Console.WriteLine( Encoding.UTF8.GetString(fs.DirDevice));
-				
-				
-				
+																	
 				fs.Start ();
 			}
 		}
