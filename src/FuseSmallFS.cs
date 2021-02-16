@@ -114,7 +114,7 @@ namespace OperatingSystem{
 
 		protected override Errno OnReadDirectory (string path, OpenedPathInfo fi, out IEnumerable<DirectoryEntry> paths)
 		{
-			Console.WriteLine(path);
+			Console.WriteLine ("(OnReadDirectory {0})", path);
 			Trace.WriteLine ("(OnReadDirectory {0})", path);
 			paths = null;
 			if (path != "/")
