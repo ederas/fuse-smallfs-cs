@@ -14,7 +14,7 @@ using System.Text;
 
 namespace OperatingSystem{
 	public class FuseDevice {
-		public static const int SECTOR_SIZE = 512;
+		public const int SECTOR_SIZE = 512;
 		
 		
 		string devicePath;
