@@ -92,7 +92,7 @@ namespace OperatingSystem{
 					return 0;
 				case hello_path:
 				case data_path:
-				case data_im_path:
+				case data_im_path:				
 					stbuf.st_mode = FilePermissions.S_IFREG |
 						NativeConvert.FromOctalPermissionString ("0444");
 					stbuf.st_nlink = 1;
@@ -105,7 +105,11 @@ namespace OperatingSystem{
 					stbuf.st_size = size;
 					return 0;
 				default:
-					return Errno.ENOENT;
+					stbuf.st_mode = FilePermissions.S_IFREG |
+						NativeConvert.FromOctalPermissionString ("0444");
+					stbuf.st_nlink = 1;
+					int size = 0;
+					return 0;
 			}
 		}
 
