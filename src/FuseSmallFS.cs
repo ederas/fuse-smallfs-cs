@@ -73,7 +73,7 @@ namespace OperatingSystem{
 			
 			for(int i=0; i<FuseDevice.SECTOR_SIZE;i+=ENTRY_SIZE)
 			{
-				Array.Copy(dirDevice,i,entry,0,ENTRY_SIZE);
+				Array.Copy(DirDevice,i,entry,0,ENTRY_SIZE);
 				
 				Array.Copy(entry, 0, entryName, 0, MAX_NAME_LEN);
 				Array.Copy(entry, MAX_NAME_LEN, entrySectors, 0, MAX_SECTORS_PER_FILE);
@@ -115,6 +115,7 @@ namespace OperatingSystem{
 
 		protected override Errno OnReadDirectory (string path, OpenedPathInfo fi, out IEnumerable<DirectoryEntry> paths)
 		{
+			Console.WriteLine(path);
 			Trace.WriteLine ("(OnReadDirectory {0})", path);
 			paths = null;
 			if (path != "/")
@@ -300,10 +301,15 @@ namespace OperatingSystem{
 					return;
 				}
 				
-				fs.FsDevice.DeviceReadSector(fs.MapDevice, 1);
-				fs.FsDevice.DeviceReadSector(fs.DirDevice, 2);
+				fs.FsDevice.DeviceReadSector(fs.MapDevice, 1);				
+				Console.WriteLine("Device Map");
+				Console.WriteLine( Encoding.UTF8.GetString(fs.MapDevice));
 				
-				Console.WriteLine();
+				fs.FsDevice.DeviceReadSector(fs.DirDevice, 2);
+				Console.WriteLine("Device Directory");
+				Console.WriteLine( Encoding.UTF8.GetString(fs.DirDevice));
+				
+				
 				
 				fs.Start ();
 			}
