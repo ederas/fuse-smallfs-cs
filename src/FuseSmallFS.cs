@@ -280,6 +280,9 @@ namespace OperatingSystem{
 			using (FuseSmallFS fs = new FuseSmallFS ()) {
 				string fullPath = "";
 				string[] unhandled = fs.ParseFuseArguments (args);
+				
+				Console.WriteLine("Arguments Count: {0}", unhandled.Length);
+				
 				foreach (string key in fs.FuseOptions.Keys) {
 					Console.WriteLine ("Option: {0}={1}", key, fs.FuseOptions [key]);
 				}
