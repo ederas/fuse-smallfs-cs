@@ -12,7 +12,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace namespace OperatingSystem{
+namespace OperatingSystem{
 	public class FuseDevice {
 		const int SECTOR_SIZE 512;
 		
