@@ -33,7 +33,7 @@ namespace OperatingSystem{
 		string deviceFile = "";
 		public string DeviceFile { get{ return device; } set{ deviceFile = value; } }
 
-		byte[] mapDevice = new byte[SECTOR_SIZE];
+		byte[] mapDevice = new byte[FuseDevice.SECTOR_SIZE];
 		byte[] dirDevice = new byte[SECTOR_SIZE];
 		
 		
