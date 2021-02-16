@@ -96,24 +96,13 @@ namespace OperatingSystem{
 						NativeConvert.FromOctalPermissionString ("0755");
 					stbuf.st_nlink = 2;
 					return 0;
-				case hello_path:
-				case data_path:
-				case data_im_path:				
+				default:			
 					stbuf.st_mode = FilePermissions.S_IFREG | NativeConvert.FromOctalPermissionString ("0444");
 					stbuf.st_nlink = 1;
-					int size = 0;
-					switch (path) {
-						case hello_path:   size = hello_str.Length; break;
-						case data_path:
-						case data_im_path: size = data_size; break;
-					}
-					stbuf.st_size = size;
+					stbuf.st_size = 10000;
 					return 0;
-				default:
-					stbuf.st_mode = FilePermissions.S_IFREG | NativeConvert.FromOctalPermissionString ("0444");
-					stbuf.st_nlink = 1;
-					stbuf.st_size = 0;					
-					return 0;
+				
+					
 			}
 		}
 
