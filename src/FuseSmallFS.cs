@@ -19,7 +19,7 @@ namespace OperatingSystem{
 	
 	class FuseSmallFS : FileSystem {
 		
-		const int MAX_FILE_SIZE         = (MAX_SECTORS_PER_FILE * SECTOR_SIZE);
+		const int MAX_FILE_SIZE         = (MAX_SECTORS_PER_FILE * FuseDevice.SECTOR_SIZE);
 		const int MAX_MAP_ENTRIES       = 256;
 		const int MAX_ROOT_DENTRIES     = 16;
 		const int MAX_NAME_LEN			= 6;
@@ -34,7 +34,7 @@ namespace OperatingSystem{
 		public string DeviceFile { get{ return device; } set{ deviceFile = value; } }
 
 		byte[] mapDevice = new byte[FuseDevice.SECTOR_SIZE];
-		byte[] dirDevice = new byte[SECTOR_SIZE];
+		byte[] dirDevice = new byte[FuseDevice.SECTOR_SIZE];
 		
 		
 		static readonly byte[] hello_str = Encoding.UTF8.GetBytes ("Hello World!\n");
