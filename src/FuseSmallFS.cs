@@ -66,7 +66,7 @@ namespace OperatingSystem{
 			
 			string name = "";
 			
-			for(int i=0; i<SECTOR_SIZE;i+=ENTRY_SIZE)
+			for(int i=0; i<FuseDevice.SECTOR_SIZE;i+=ENTRY_SIZE)
 			{
 				Array.Copy(dirDevice,i,entry,0,ENTRY_SIZE);
 				
