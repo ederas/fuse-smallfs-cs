@@ -295,8 +295,8 @@ namespace OperatingSystem{
 					return;
 				}
 				
-				fs.FsDevice.DeviceReadSector(1, fs.MapDevice);
-				fs.FsDevice.DeviceReadSector(2, fs.DirDevice);
+				fs.FsDevice.DeviceReadSector(fs.MapDevice, 1);
+				fs.FsDevice.DeviceReadSector(fs.DirDevice, 2);
 				
 				Console.WriteLine();
 				
