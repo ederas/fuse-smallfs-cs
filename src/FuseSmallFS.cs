@@ -34,8 +34,6 @@ namespace OperatingSystem{
 		public string DeviceFile { get{ return deviceFile; } set{ deviceFile = value; } }
 
 		FuseDevice fsDevice = null;
-		public FuseDevice FsDevice { get{ return fsDevice; } set{ fsDevice = value; } }
-
 		byte[] mapDevice = new byte[FuseDevice.SECTOR_SIZE];		
 		byte[] dirDevice = new byte[FuseDevice.SECTOR_SIZE];		
 		
@@ -70,7 +68,7 @@ namespace OperatingSystem{
 			
 			for(int i=0; i<FuseDevice.SECTOR_SIZE;i+=ENTRY_SIZE)
 			{
-				Array.Copy(DirDevice,i,entry,0,ENTRY_SIZE);
+				Array.Copy(dirDevice,i,entry,0,ENTRY_SIZE);
 				
 				Array.Copy(entry, 0, entryName, 0, MAX_NAME_LEN);
 				Array.Copy(entry, MAX_NAME_LEN, entrySectors, 0, MAX_SECTORS_PER_FILE);
@@ -274,10 +272,18 @@ namespace OperatingSystem{
 			}
 		}
 		
-		public void InitFs()
+		public bool InitFs(string fullPath)
 		{
-			DeviceReadSector(mapDevice, 1);
-			DeviceReadSector(dirDevice, 2);
+			fsDevice = new FuseDevice(fullPath);
+				
+			Console.WriteLine("Device: {0}", fullPath);
+			if (!fsDevice.DeviceOpen()) {				
+				return false;
+			}
+				
+			fsDevice.DeviceReadSector(mapDevice, 1);
+			fsDevice.DeviceReadSector(dirDevice, 2);
+			return true;
 		}
 
 		public static void Main (string[] args)
@@ -296,10 +302,9 @@ namespace OperatingSystem{
 					return;
 				
 				fullPath = Path.GetFullPath(fs.DeviceFile);
-				fs.FsDevice = new FuseDevice(fullPath);
 				
-				Console.WriteLine("Device: {0}", fullPath);
-				if (!fs.FsDevice.DeviceOpen()) {
+				if (!fs.InitFs(fullPath))
+				{
 					Console.WriteLine("Cannot open device file {0}", fullPath);
 					return;
 				}
