@@ -74,7 +74,7 @@ namespace OperatingSystem{
 				entrySectors[0] = 0x0;
 				
 				Array.Copy(dirDevice,i,entry,0,ENTRY_SIZE);				
-				if (entry[0] = 0x0) continue;
+				if (entry[0] == 0x0) continue;
 				
 				Array.Copy(entry, 0, entryName, 0, MAX_NAME_LEN);
 				Array.Copy(entry, MAX_NAME_LEN, entrySectors, 0, MAX_SECTORS_PER_FILE);
