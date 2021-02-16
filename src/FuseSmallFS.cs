@@ -296,6 +296,8 @@ namespace OperatingSystem{
 				
 			fsDevice.DeviceReadSector(mapDevice, 1);
 			fsDevice.DeviceReadSector(dirDevice, 2);
+			
+			SerializeDirectoryDevice();
 			return true;
 		}
 
