@@ -32,7 +32,7 @@ namespace OperatingSystem{
 		{
 			if (!File.Exists(DevicePath)) return false;
 			
-			DeviceFile = new FileStream(name, FileMode.Open, FileAccess.ReadWrite);			
+			DeviceFile = new FileStream(DevicePath, FileMode.Open, FileAccess.ReadWrite);			
 			return true;			
 		}
 
