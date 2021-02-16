@@ -36,10 +36,11 @@ namespace OperatingSystem{
 		FuseDevice fsDevice = null;
 		public FuseDevice FsDevice { get{ return fsDevice; } set{ fsDevice = value; } }
 
-
 		byte[] mapDevice = new byte[FuseDevice.SECTOR_SIZE];
-		byte[] dirDevice = new byte[FuseDevice.SECTOR_SIZE];
+		public byte[] MapDevice { get{ return mapDevice; } set{ mapDevice = value; } }
 		
+		byte[] dirDevice = new byte[FuseDevice.SECTOR_SIZE];
+		public byte[] DirDevice { get{ return mapDevice; } set{ mapDevice = value; } }
 		
 		static readonly byte[] hello_str = Encoding.UTF8.GetBytes ("Hello World!\n");
 		const string hello_path = "/hello";
@@ -294,8 +295,8 @@ namespace OperatingSystem{
 					return;
 				}
 				
-				fs.FsDevice.DeviceReadSector(1, mapDevice);
-				fs.FsDevice.DeviceReadSector(2, dirDevice);
+				fs.FsDevice.DeviceReadSector(1, fs.MapDevice);
+				fs.FsDevice.DeviceReadSector(2, fs.DirDevice);
 				
 				Console.WriteLine();
 				
