@@ -282,7 +282,7 @@ namespace OperatingSystem{
 				if (!fs.ParseArguments (unhandled))
 					return;
 				
-				fullPath = Path.GetFullPath(base.DeviceFile);
+				fullPath = Path.GetFullPath(DeviceFile);
 				fsDevice = new FuseDevice(fullPath);
 				
 				Console.WriteLine("Device: {0}", fullPath);
