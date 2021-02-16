@@ -75,6 +75,7 @@ namespace OperatingSystem{
 				Array.Copy(entry, MAX_NAME_LEN, entrySectors, 0, MAX_SECTORS_PER_FILE);
 				
 				name = Encoding.UTF8.GetString(entryName);
+				Console.WriteLine("Entry Name: {0}", name);
 				rootDir.Add(name, entrySectors);								
 			}
 			
