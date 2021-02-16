@@ -53,13 +53,14 @@ namespace OperatingSystem{
 
 		public FuseSmallFS ()
 		{
-			Trace.WriteLine ("(HelloFS creating)");
+			Console.WriteLine ("(FuseSmallFS creating)");
 			hello_attrs ["foo"] = Encoding.UTF8.GetBytes ("bar");
 		}
 
 
 		private void SerializeDirectoryDevice()
 		{
+			Console.WriteLine("SerializeDirectoryDevice");
 			byte[] entry = new byte[ENTRY_SIZE];
 			byte[] entryName = new byte[MAX_NAME_LEN];
 			byte[] entrySectors = new byte[MAX_SECTORS_PER_FILE];
@@ -80,7 +81,7 @@ namespace OperatingSystem{
 		}
 		protected override Errno OnGetPathStatus (string path, out Stat stbuf)
 		{
-			Trace.WriteLine ("(OnGetPathStatus {0})", path);
+			Console.WriteLine ("(OnGetPathStatus {0})", path);
 
 			stbuf = new Stat ();
 			switch (path) {
@@ -116,8 +117,7 @@ namespace OperatingSystem{
 			if (path != "/")
 				return Errno.ENOENT;
 
-			paths = GetEntries ();
-			Console.WriteLine("Entries Count: {0}", paths.Count);
+			paths = GetEntries ();			
 			return 0;
 		}
 
@@ -132,7 +132,7 @@ namespace OperatingSystem{
 
 		protected override Errno OnOpenHandle (string path, OpenedPathInfo fi)
 		{
-			Trace.WriteLine (string.Format ("(OnOpen {0} Flags={1})", path, fi.OpenFlags));
+			Console.WriteLine (string.Format ("(OnOpen {0} Flags={1})", path, fi.OpenFlags));
 			if (path != hello_path && path != data_path && path != data_im_path)
 				return Errno.ENOENT;
 			if (path == data_im_path && !have_data_im)
@@ -144,7 +144,7 @@ namespace OperatingSystem{
 
 		protected override Errno OnReadHandle (string path, OpenedPathInfo fi, byte[] buf, long offset, out int bytesWritten)
 		{
-			Trace.WriteLine ("(OnRead {0})", path);
+			Console.WriteLine ("(OnRead {0})", path);
 			bytesWritten = 0;
 			int size = buf.Length;
 			if (path == data_im_path)
