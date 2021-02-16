@@ -18,10 +18,10 @@ namespace OperatingSystem{
 		
 		
 		string devicePath;
-		public DevicePath { get { return devicePath; } set { devicePath = value; } }
+		public string DevicePath { get { return devicePath; } set { devicePath = value; } }
 		
 		FileStream deviceFile;
-		private DeviceFile{ get { return deviceFile; }}
+		private FileStream DeviceFile{ get { return deviceFile; }}
 
 		public FuseDevice (string path)
 		{
