@@ -27,12 +27,15 @@ namespace OperatingSystem{
 		const int MAX_SECTORS_PER_FILE	= 26;
 		const int ENTRY_SIZE = MAX_NAME_LEN + MAX_SECTORS_PER_FILE;
 		
-		FuseDevice fsDevice = null;
-
+		
 		Dictionary<string, byte[]> rootDir = new Dictionary<string, byte[]>();
 		
 		string deviceFile = "";
 		public string DeviceFile { get{ return deviceFile; } set{ deviceFile = value; } }
+
+		FuseDevice fsDevice = null;
+		public FuseDevice FsDevice { get{ return fsDevice; } set{ fsDevice = value; } }
+
 
 		byte[] mapDevice = new byte[FuseDevice.SECTOR_SIZE];
 		byte[] dirDevice = new byte[FuseDevice.SECTOR_SIZE];
@@ -283,16 +286,16 @@ namespace OperatingSystem{
 					return;
 				
 				fullPath = Path.GetFullPath(fs.DeviceFile);
-				fsDevice = new FuseDevice(fullPath);
+				fs.FsDevice = new FuseDevice(fullPath);
 				
 				Console.WriteLine("Device: {0}", fullPath);
-				if (!fsDevice.Open(fullPath)) {
+				if (!fs.FsDevice.Open(fullPath)) {
 					Console.WriteLine("Cannot open device file {0}", fullPath);
 					return;
 				}
 				
-				fsDevice.DeviceReadSector(1, mapDevice);
-				fsDevice.DeviceReadSector(2, dirDevice);
+				fs.FsDevice.DeviceReadSector(1, mapDevice);
+				fs.FsDevice.DeviceReadSector(2, dirDevice);
 				
 				Console.WriteLine();
 				
